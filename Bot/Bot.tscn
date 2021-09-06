@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Bot/circle.png" type="Texture" id=1]
 [ext_resource path="res://Bot/Bot.gd" type="Script" id=2]
 [ext_resource path="res://Bot/arrow.png" type="Texture" id=3]
+[ext_resource path="res://Bot/bite.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -11,6 +12,10 @@ radius = 22.907
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 71.6014
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 9.37012
+height = 26.3794
 
 [node name="Bot" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -32,13 +37,51 @@ shape = SubResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GettingCloseArea"]
 shape = SubResource( 3 )
 
-[node name="Arrow" type="Sprite" parent="."]
+[node name="DirectionArrow" type="Sprite" parent="."]
+visible = false
 z_index = -2
 texture = ExtResource( 3 )
 centered = false
 offset = Vector2( 0, -32 )
 
+[node name="BotClock" type="Timer" parent="."]
+
+[node name="Bite" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 4 )
+
+[node name="BiteArea" type="Area2D" parent="Bite"]
+
+[node name="BiteShape" type="CollisionShape2D" parent="Bite/BiteArea"]
+position = Vector2( 9.17755, -0.493652 )
+shape = SubResource( 4 )
+
+[node name="KillCount" type="Label" parent="."]
+margin_top = -24.0
+margin_right = 9.0
+margin_bottom = -10.0
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hunger" type="Label" parent="."]
+margin_left = 0.187286
+margin_top = 9.71191
+margin_right = 9.18729
+margin_bottom = 23.7119
+custom_colors/font_color = Color( 0.317647, 0.996078, 0.278431, 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HungerTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="body_entered" from="EmergencyArea" to="." method="_on_EmergencyArea_body_entered"]
 [connection signal="body_exited" from="EmergencyArea" to="." method="_on_EmergencyArea_body_exited"]
 [connection signal="body_entered" from="GettingCloseArea" to="." method="_on_GettingCloseArea_body_entered"]
 [connection signal="body_exited" from="GettingCloseArea" to="." method="_on_GettingCloseArea_body_exited"]
+[connection signal="body_entered" from="Bite/BiteArea" to="." method="_on_BiteArea_body_entered"]
+[connection signal="timeout" from="HungerTimer" to="." method="_on_HungerTimer_timeout"]

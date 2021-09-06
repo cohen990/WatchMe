@@ -14,10 +14,15 @@ func float_in_range_asymmetric(lower_range: float, upper_range: float):
 func random_position(bounds: Bounds):
 	var x = rng.randf_range(bounds.lower.x, bounds.upper.x)
 	var y = rng.randf_range(bounds.lower.y, bounds.upper.y)
-	print(bounds)
 	return Vector2(x, y)
 
 func randomise_direction_in_radians_cone(direction: Vector2, rads: float):
 	var new_angle = rng.randf_range(-rads, rads)
 	return direction.rotated(new_angle)
 	
+func random_float():
+	return rng.randf()
+
+func random_from_array(array: Array):
+	var chosen = rng.randi_range(0, array.size() - 1)
+	return array[chosen]
