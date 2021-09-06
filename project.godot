@@ -14,26 +14,32 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://World/Bounds.gd"
 }, {
+"base": "Goal",
+"class": "ChaseGoal",
+"language": "GDScript",
+"path": "res://Bot/Goals/ChaseGoal.gd"
+}, {
 "base": "Node",
 "class": "Goal",
 "language": "GDScript",
-"path": "res://Bot/Goal.gd"
-}, {
-"base": "Node",
-"class": "GoalType",
-"language": "GDScript",
-"path": "res://Bot/GoalType.gd"
+"path": "res://Bot/Goals/Goal.gd"
 }, {
 "base": "Goal",
 "class": "TravelGoal",
 "language": "GDScript",
-"path": "res://Bot/TravelGoal.gd"
+"path": "res://Bot/Goals/TravelGoal.gd"
+}, {
+"base": "Goal",
+"class": "WaitGoal",
+"language": "GDScript",
+"path": "res://Bot/Goals/WaitGoal.gd"
 } ]
 _global_script_class_icons={
 "Bounds": "",
+"ChaseGoal": "",
 "Goal": "",
-"GoalType": "",
-"TravelGoal": ""
+"TravelGoal": "",
+"WaitGoal": ""
 }
 
 [application]
